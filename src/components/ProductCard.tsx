@@ -2,17 +2,18 @@ import React from 'react'
 //import StarRating from './StarRating'
 //import { useGetProductsQuery } from '../redux/services/aliexpress'
 //import Types from '../types/types'
-//import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 //import { addToCart } from '../redux/cartSlice'
 import {Link} from 'react-router-dom'
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, handleAddToCart }) => {
   console.log(product)
     //const { data, isLoading, error } = useGetProductsQuery()
     //console.log(title)
   //const { freeShipping, shippingFee } = product.delivery
   //const products = product.filter((item) => item.priceInfo.currentPrice.price !== null)
   const { id, fulfillmentSpeed, numberOfReviews, name, priceInfo, imageInfo } = product
+  const dispatch = useDispatch()
   //console.log(priceInfo)
   
   console.log(priceInfo)
@@ -36,9 +37,10 @@ const ProductCard = ({ product }) => {
           <h1 className='w-2/3 my-2'>{itemTitle}</h1>
           <p className='w-1/3 my-2 font-semibold'>{price}</p>
                 <p className='px-4 pl-16'></p>
-          <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(addToCart(itemId))}>Add to cart</button>
+
           </div>
-          </Link>
+        </Link>
+        <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(addToCart(itemId))}>Add to cart</button>
         </div>
   )
 }

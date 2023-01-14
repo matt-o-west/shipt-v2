@@ -3,11 +3,13 @@ import axios from 'axios'
 import ProductCard from './ProductCard'
 //import { useGetProductsQuery } from '../redux/services/aliexpress'
 import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 
 const HomePage = () => {
   //const { data, isFetching, error, refetch} = useGetProductsQuery()
   const [products, setProducts] = useState([])
+  const dispatch = useDispatch()
   
   //console.log(data)
   
@@ -32,6 +34,8 @@ const HomePage = () => {
   console.error(error);
 });
 
+    
+    
     /*
         axios.get('https://dummyjson.com/products')
     .then((res) => {
@@ -46,7 +50,13 @@ const HomePage = () => {
 
   }, []);
 
-//console.log(products)
+  const handleAddToCart = (product) => {
+    console.log(product)
+    dispatch({type: 'cart/addToCart', payload: product})
+  }
+
+
+
   return (
     <div className='bg-blue-100 mx-12'>
     <div className='flex flex-row pt-40 w-fullm mb-12'>
@@ -60,7 +70,7 @@ const HomePage = () => {
         
       <div className='grid grid-cols-1 lg:max-w-6xl lg:ml-44 sm:grid-cols-3 lg:grid-cols-5 gap-6 gap-x-0'>
       {products.length > 0 && products.map((product) => 
-        <ProductCard product={product} key={product.id} />  
+        <ProductCard product={product} key={product.id} handleAddToCart={handleAddToCart} />  
     ) || <p>Loading...</p>}
       
     
