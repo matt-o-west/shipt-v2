@@ -40,7 +40,7 @@ const ProductCard = ({ product, handleAddToCart }) => {
 
           </div>
         </Link>
-        <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(addToCart(itemId))}>Add to cart</button>
+        <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => handleAddToCart()}>Add to cart</button>
         </div>
   )
 }
