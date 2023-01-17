@@ -3,10 +3,10 @@ import React from 'react'
 //import { useGetProductsQuery } from '../redux/services/aliexpress'
 //import Types from '../types/types'
 import { useDispatch } from 'react-redux'
-//import { addToCart } from '../redux/cartSlice'
+import { addToCart } from '../redux/cartSlice'
 import {Link} from 'react-router-dom'
 
-const ProductCard = ({ product, handleAddToCart }) => {
+const ProductCard = ({ product }) => {
   console.log(product)
     //const { data, isLoading, error } = useGetProductsQuery()
     //console.log(title)
@@ -40,7 +40,7 @@ const ProductCard = ({ product, handleAddToCart }) => {
 
           </div>
         </Link>
-        <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(handleAddToCart())}>Add to cart</button>
+        <button className='flex-nowrap bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-1 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(addToCart(product))}>Add to cart</button>
         </div>
   )
 }
