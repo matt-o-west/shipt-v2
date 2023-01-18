@@ -7,21 +7,18 @@ import { addToCart } from '../redux/cartSlice'
 import {Link} from 'react-router-dom'
 
 const ProductCard = ({ product }) => {
-  console.log(product)
+  //console.log(product)
     //const { data, isLoading, error } = useGetProductsQuery()
     //console.log(title)
   //const { freeShipping, shippingFee } = product.delivery
   //const products = product.filter((item) => item.priceInfo.currentPrice.price !== null)
   const { id, fulfillmentSpeed, numberOfReviews, name, priceInfo, imageInfo } = product
   const dispatch = useDispatch()
-  //console.log(priceInfo)
-  
-  console.log(priceInfo)
+  console.log(product)
 
   const price = priceInfo.currentPrice?.price || priceInfo.listPrice?.price
   const { thumbnailUrl } = imageInfo
 
-  //const dispatch = useDispatch()
   
   const itemTitle = name.split(' ').slice(0, 4).join(' ').trim()
 
@@ -35,7 +32,7 @@ const ProductCard = ({ product }) => {
             </div>
             <div className="z-20 text-black font-medium flex-row flex flex-wrap">
           <h1 className='w-2/3 my-2'>{itemTitle}</h1>
-          <p className='w-1/3 my-2 font-semibold'>{price}</p>
+          <p className='w-1/3 my-2 font-semibold'>${price}</p>
                 <p className='px-4 pl-16'></p>
 
           </div>
