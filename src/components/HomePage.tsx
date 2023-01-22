@@ -29,7 +29,7 @@ const HomePage = () => {
     axios.request(options).then(function (response) {
       const items = response.data.data.search.searchResult.itemStacks[0].items
   setProducts(items)
-  console.log(items);
+  //console.log(items);
 }).catch(function (error) {
   console.error(error);
 });

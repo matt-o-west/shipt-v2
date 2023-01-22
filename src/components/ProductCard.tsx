@@ -4,7 +4,7 @@ import React from 'react'
 //import Types from '../types/types'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../redux/cartSlice'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const ProductCard = ({ product }) => {
   //console.log(product)
@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
   //const products = product.filter((item) => item.priceInfo.currentPrice.price !== null)
   const { id, fulfillmentSpeed, numberOfReviews, name, priceInfo, imageInfo } = product
   const dispatch = useDispatch()
-  console.log(product)
+  //console.log(product)
 
   const price = priceInfo.currentPrice?.price || priceInfo.listPrice?.price
   const { thumbnailUrl } = imageInfo
