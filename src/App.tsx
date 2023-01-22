@@ -9,12 +9,12 @@ import Nav from './components/Nav'
 function App() {
   const [count, setCount] = useState(0)
   const params = useParams()
-  const cartTotal = useSelector((state) => state.cart)
+  
 
   return (
     <div className='bg-blue-100'>
         <Router>
-        <Nav cartTotal={cartTotal} />
+        <Nav/>
 
         <Routes>
           <Route path='/' element={<HomePage />} />
