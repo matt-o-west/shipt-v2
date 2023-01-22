@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import store from './store'
+//import store from './store'
 
 const initialState = {
   cart: [],
@@ -24,7 +24,7 @@ const cartSlice = createSlice({
         item.quantity += 1
       } else {
         state.cart.push({ ...action.payload, quantity: 1 })
-        console.log(store.getState())
+        //console.log(store.getState())
       }
     },
     incrementQuantity: (state, action) => {

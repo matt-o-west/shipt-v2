@@ -7,12 +7,19 @@ import storage from 'redux-persist/lib/storage'
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist: ['cartReducer'],
 }
 
 const persistedReducer = persistReducer(persistConfig, cartReducer)
 
 const store = configureStore({
   reducer: persistedReducer,
+  extraReducers: (builder) => {
+    builder.addCase('aliexpress/getProducts/fulfilled', (state, action) => {
+      state.products = action.payload
+      state.isLoading = false
+    })
+  },
 })
 
 export default persistStore(store)

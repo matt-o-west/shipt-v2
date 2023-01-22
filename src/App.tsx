@@ -9,7 +9,7 @@ import Nav from './components/Nav'
 function App() {
   const [count, setCount] = useState(0)
   const params = useParams()
-  const cartTotal = useSelector((state) => state.cart.length)
+  const cartTotal = useSelector((state) => state.cart)
 
   return (
     <div className='bg-blue-100'>

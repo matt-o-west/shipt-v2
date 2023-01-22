@@ -50,13 +50,6 @@ const HomePage = () => {
 
   }, []);
 
-  const handleAddToCart = (product) => {
-    console.log(product)
-    dispatch({type: 'cart/addToCart', payload: product})
-  }
-
-
-
   return (
     <div className='bg-blue-100 mx-12'>
     <div className='flex flex-row pt-40 w-fullm mb-12'>
@@ -70,7 +63,7 @@ const HomePage = () => {
         
       <div className='grid grid-cols-1 lg:max-w-6xl lg:ml-44 sm:grid-cols-3 lg:grid-cols-5 gap-6 gap-x-0'>
       {products.length > 0 && products.map((product) => 
-        <ProductCard product={product} key={product.id} handleAddToCart={handleAddToCart} />  
+        <ProductCard product={product} key={product.id} />  
     ) || <p>Loading...</p>}
       
     
