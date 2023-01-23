@@ -1,37 +1,17 @@
 import React, { ButtonHTMLAttributes, useEffect } from 'react'
 import './ProductPage.css'
-import { useState } from 'react'
-import axios from 'axios'
+//import { useState } from 'react'
+//import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const ProductPage = ({  }) => {
+const ProductPage = ({ products }) => {
   const params = useParams()
-  const [ product, setProduct] = useState({})
+  console.log(params)
+  const product = products.filter((product) => product.id === params.id)
+  console.log(product)
+  const { name, averageRating, numberOfReviews, availabilityStatusV2, currentPrice } = product[0]
 
-  //console.log(product)
-
-  const options = {
-    method: 'GET',
-    url: 'https://aliexpress-datahub.p.rapidapi.com/item_detail',
-    params: {itemId: `${params.id}`},
-    headers: {
-      'X-RapidAPI-Key': '81c7ff456emsh15dd1877c019034p1c55acjsn3e24de972fd9',
-      'X-RapidAPI-Host': 'aliexpress-datahub.p.rapidapi.com'
-    }
-  };
-
-  useEffect(() => {
-      
-  axios.request(options).then(function (response) {
-    console.log(response.data);
-    setProduct(response.data)
-  }).catch(function (error) {
-    console.error(error);
-  });
-
-  }, [])
-
-
+  
 
   return (
     <>
@@ -39,7 +19,7 @@ const ProductPage = ({  }) => {
         <div className='productImage'>
           <img className='main-img' src='' />
         </div>
-        <div className='gallery'>
+        {/*<div className='gallery'>
           <img
             className='galleryImage'
             src='image-product-1-thumbnail.jpg'
@@ -64,13 +44,11 @@ const ProductPage = ({  }) => {
             alt='thumbnail image 4'
             id='4'
           />
-        </div>
+  </div>*/}
         <div className='productInfo'>
-          <h1>Limited Edition Sneakers</h1>
+          <h1>{name}</h1>
           <p id='description'>
-            These low-profile sneakers are your perfect casual wear companion.
-            Featuring a durable rubber outer sole, they’ll withstand everything
-            the weather can offer.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta mollitia incidunt error nulla, animi dolores ipsa culpa! Amet ullam veritatis quo vel? Necessitatibus dolore excepturi adipisci cupiditate! Itaque, maxime aperiam.
           </p>
           <p id='price'>$125.00</p>
           <p id='strikethrough'>$250.00</p>

@@ -1,7 +1,7 @@
 import './Nav.css'
 //import { Box } from '@material-ui/core'
 //import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Nav = () => {
@@ -11,7 +11,7 @@ const Nav = () => {
 
   return (
     <nav className='bg-blue-200 border-b-2 border-black'>
-      <img src='/logo.svg' alt='company logo' id='logo' />
+      <Link to='/'><img src='/public/logo.svg' alt='company logo' className='p-10 mr-10' /></Link>
       <NavLink
         className='link'
         to='/products'
