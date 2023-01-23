@@ -5,7 +5,8 @@ import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 const Nav = () => {
-  const cartTotal = useSelector((state) => state.cart.length)
+  const cart = useSelector((state) => state.cart)
+  const cartTotal = cart.reduce((acc, item) => acc + item.quantity, 0)
   console.log(cartTotal)
 
   return (
