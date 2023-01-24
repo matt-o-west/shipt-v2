@@ -3,23 +3,25 @@ import './ProductPage.css'
 //import { useState } from 'react'
 //import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { incrementQuantity, decrementQuantity } from '../redux/cartSlice'
 
 const ProductPage = ({ products }) => {
   const params = useParams()
-  console.log(params)
+  
   const product = products.filter((product) => product.id === params.id)
-  console.log(product)
-  const { name, averageRating, numberOfReviews, availabilityStatusV2, currentPrice } = product[0]
-
+  
+  const { name, averageRating, numberOfReviews, availabilityStatusV2, priceInfo, imageInfo, quantity } = product[0]
+  const { thumbnailUrl } = imageInfo
+  const { priceString } = priceInfo.currentPrice
   
 
   return (
     <>
       <div className='page'>
         <div className='productImage'>
-          <img className='main-img' src='' />
-        </div>
-        {/*<div className='gallery'>
+          <img className='main-img' src={thumbnailUrl} />
+          </div>
+           {/*<div className='gallery'>
           <img
             className='galleryImage'
             src='image-product-1-thumbnail.jpg'
@@ -44,14 +46,21 @@ const ProductPage = ({ products }) => {
             alt='thumbnail image 4'
             id='4'
           />
-  </div>*/}
+          </div>*/}
         <div className='productInfo'>
           <h1>{name}</h1>
+          <div className="flex items-center mb-6">
+            <svg aria-hidden="true" className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Rating star</title><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+            <p className="ml-2 text-sm font-bold text-gray-900">{averageRating}</p>
+            <span className="w-1 h-1 mx-1.5 bg-gray-500 rounded-full dark:bg-gray-400"></span>
+            <a href="#" className="text-sm font-medium text-gray-900 underline hover:no-underline">{numberOfReviews} reviews</a>
+          </div>
           <p id='description'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta mollitia incidunt error nulla, animi dolores ipsa culpa! Amet ullam veritatis quo vel? Necessitatibus dolore excepturi adipisci cupiditate! Itaque, maxime aperiam.
           </p>
-          <p id='price'>$125.00</p>
-          <p id='strikethrough'>$250.00</p>
+          <p id='price'>{priceString}</p>
+          <p id='strikethrough'>$list price</p>
+          
         </div>
       </div>
     </>
