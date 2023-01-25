@@ -3,10 +3,12 @@ import './ProductPage.css'
 //import { useState } from 'react'
 //import axios from 'axios'
 import { useParams } from 'react-router-dom'
-import { incrementQuantity, decrementQuantity } from '../redux/cartSlice'
+import { incrementQuantity, decrementQuantity, addToCart } from '../redux/cartSlice'
+import { useDispatch } from 'react-redux'
 
 const ProductPage = ({ products }) => {
   const params = useParams()
+  const dispatch = useDispatch()
   
   const product = products.filter((product) => product.id === params.id)
   
@@ -60,8 +62,10 @@ const ProductPage = ({ products }) => {
           </p>
           <p id='price'>{priceString}</p>
           <p id='strikethrough'>$list price</p>
-          
-        </div>
+          <div className='grid grid-cols-2'>
+          <button className='flex-nowrap col-span-1 bg-blue-500 border-blue-800 border hover:bg-blue-700 transition-all hover:ease-out text-white font-bold py-2 px-4 rounded-full white-space:nowrap mt-8' onClick={() => dispatch(addToCart(product))}>Add to cart</button>
+          </div>
+          </div>
       </div>
     </>
   )

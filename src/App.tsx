@@ -32,7 +32,7 @@ function App() {
 
     axios.request(options).then(function (response) {
       const items = response.data.data.search.searchResult.itemStacks[0].items
-  setProducts(items)
+  setProducts(items.filter((item) => item.priceInfo.currentPrice !== null))
   //console.log(items);
 }).catch(function (error) {
   console.error(error);
