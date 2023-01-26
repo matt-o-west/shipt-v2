@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 //import store from './store'
 
 const initialState = {
@@ -7,6 +8,25 @@ const initialState = {
   quantity: 0,
   isLoading: true,
 }
+
+const walmartApi = createApi({
+  reducerPath: 'walmartApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://walmart.p.rapidapi.com/',
+  }),
+  endpoints: (builder) => ({
+    searchProducts: builder.query({
+      query: (searchTerm) => ({
+        url: `v2/auto-complete?term=${searchTerm.replaceAll(/'\\s', '%20'/)}`,
+      }),
+    }),
+    getReviews: builder.query({
+      query: (productId, limit = 20, sort = 'relevancy') => ({
+        url: `reviews/v2/list?usItemId=${productId}&limit=${limit}&page=1&sort=${sort}`,
+      }),
+    }),
+  }),
+})
 
 const cartSlice = createSlice({
   name: 'cart',
@@ -42,6 +62,8 @@ const cartSlice = createSlice({
 })
 
 const { actions, reducer } = cartSlice
+
+export const { useSearchProductsQuery, useGetReviewsQuery } = walmartApi
 
 export const { addToCart, incrementQuantity, decrementQuantity, removeItem } =
   actions
