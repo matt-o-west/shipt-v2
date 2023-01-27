@@ -25,6 +25,11 @@ const walmartApi = createApi({
         url: `reviews/v2/list?usItemId=${productId}&limit=${limit}&page=1&sort=${sort}`,
       }),
     }),
+    getProductDetails: builder.query({
+      query: (productId) => ({
+        url: `v3/items/${productId}`,
+      }),
+    }),
   }),
 })
 
