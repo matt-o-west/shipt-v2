@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter as Router, useParams } from 'react-router-
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
+import { useSearchProductsQuery, useGetProductDetailsQuery, useGetReviewsQuery } from './redux/cartSlice'
 import ProductPage from './components/ProductPage'
 import HomePage from './components/HomePage'
 import Nav from './components/Nav'
@@ -11,11 +12,12 @@ import Nav from './components/Nav'
 function App() {
   const [count, setCount] = useState(0)
   const params = useParams()
+  const { data } = useSearchProductsQuery()
   
   const [products, setProducts] = useState([])
   const dispatch = useDispatch()
   
-  //console.log(data)
+  console.log(data)
   
   const options = {
     method: 'GET',

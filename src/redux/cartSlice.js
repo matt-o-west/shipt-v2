@@ -9,7 +9,7 @@ const initialState = {
   isLoading: true,
 }
 
-const walmartApi = createApi({
+export const walmartApi = createApi({
   reducerPath: 'walmartApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://walmart.p.rapidapi.com/',
@@ -27,7 +27,7 @@ const walmartApi = createApi({
     }),
     getProductDetails: builder.query({
       query: (productId) => ({
-        url: `v3/items/${productId}`,
+        url: `v3/get-details?usItemId=${productId}`,
       }),
     }),
   }),
@@ -68,7 +68,11 @@ const cartSlice = createSlice({
 
 const { actions, reducer } = cartSlice
 
-export const { useSearchProductsQuery, useGetReviewsQuery } = walmartApi
+export const {
+  useSearchProductsQuery,
+  useGetReviewsQuery,
+  useGetProductDetailsQuery,
+} = walmartApi
 
 export const { addToCart, incrementQuantity, decrementQuantity, removeItem } =
   actions

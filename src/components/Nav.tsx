@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux'
 
 const Nav = () => {
   const cart = useSelector((state) => state.cart)
-  const cartTotal = cart.reduce((acc, item) => acc + item.quantity, 0)
-  console.log(cartTotal)
+  const cartTotal = cart?.reduce((acc, item) => acc + item.quantity, 0)
+  //console.log(cartTotal)
 
   return (
     <nav className='bg-blue-200 border-b-2 border-black'>
