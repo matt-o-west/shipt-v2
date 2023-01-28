@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-//import { aliexpress } from './services/aliExpressService'
+import { walmartApi } from './cartSlice'
 import cartReducer from './cartSlice'
 //import { persistStore, persistReducer } from 'redux-persist'
 //import storage from 'redux-persist/lib/storage'
@@ -13,7 +13,12 @@ import cartReducer from './cartSlice'
 //const persistedReducer = persistReducer(persistConfig, cartReducer)
 
 const store = configureStore({
-  reducer: cartReducer,
+  reducer: {
+    cartReducer,
+    [walmartApi.reducerPath]: walmartApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(walmartApi.middleware),
   extraReducers: (builder) => {
     builder.addCase('aliexpress/getProducts/fulfilled', (state, action) => {
       state.products = action.payload

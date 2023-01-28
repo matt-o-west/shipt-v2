@@ -7,27 +7,57 @@ const initialState = {
   amount: 0,
   quantity: 0,
   isLoading: true,
+  auth: '81c7ff456emsh15dd1877c019034p1c55acjsn3e24de972fd9',
 }
 
 export const walmartApi = createApi({
   reducerPath: 'walmartApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://walmart.p.rapidapi.com/',
+    prepareHeaders: (headers) => {
+      headers.set(
+        'x-rapidapi-key',
+        '81c7ff456emsh15dd1877c019034p1c55acjsn3e24de972fd9'
+      )
+      headers.set('x-rapidapi-host', 'walmart.p.rapidapi.com')
+      return headers
+    },
   }),
   endpoints: (builder) => ({
     searchProducts: builder.query({
       query: (searchTerm) => ({
-        url: `v2/auto-complete?term=${searchTerm.replaceAll(/'\\s', '%20'/)}`,
+        url: `v2/auto-complete`,
+        params: {
+          limit: 10,
+          term: searchTerm,
+        },
+      }),
+    }),
+    getAllProducts: builder.query({
+      query: (searchTerm) => ({
+        url: `v2/search?query=${searchTerm.replace(/\s/g, '%20')}`,
+        params: {
+          limit: 10,
+          term: searchTerm.replace(/\s/g, '%20'),
+        },
       }),
     }),
     getReviews: builder.query({
       query: (productId, limit = 20, sort = 'relevancy') => ({
         url: `reviews/v2/list?usItemId=${productId}&limit=${limit}&page=1&sort=${sort}`,
+        params: {
+          limit: 10,
+          term: searchTerm.replace(/\s/g, '%20'),
+        },
       }),
     }),
     getProductDetails: builder.query({
       query: (productId) => ({
-        url: `v3/get-details?usItemId=${productId}`,
+        url: `products/v3/get-details?usItemId=${productId}`,
+        params: {
+          limit: 10,
+          term: searchTerm.replace(/\s/g, '%20'),
+        },
       }),
     }),
   }),
