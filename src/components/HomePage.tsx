@@ -1,5 +1,4 @@
 import React from 'react'
-//import axios from 'axios'
 import ProductCard from './ProductCard'
 import {
   useSearchProductsQuery,
@@ -7,25 +6,22 @@ import {
   useGetReviewsQuery,
 } from '../redux/cartSlice'
 import { useEffect, useState, useRef } from 'react'
-//import { useDispatch } from 'react-redux'
 
 const HomePage = ({ products }) => {
   const [input, setInput] = useState('')
-  const [prevInput, setPrevInput] = useState('')
-  const { data, isFetching, error, refetch } = useSearchProductsQuery(input)
-  const inputRef = useRef(input)
+  const { data, isFetching, error, refetch } = useSearchProductsQuery()
+  const inputRef = useRef('')
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (inputRef.current !== input) {
       refetch({ input })
       inputRef.current = input
     }
-  }, [input, refetch])
+  }, [input, refetch])*/
   console.log(data)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    refetch({ input })
   }
 
   if (isFetching) return <div>Loading...</div>
@@ -58,7 +54,10 @@ const HomePage = ({ products }) => {
           <input
             className='w-2/3 p-3 focus-within: text-left'
             type='text'
-            onChange={(e) => setInput(e.target.value)}
+            ref={inputRef}
+            onChange={(e) => {
+              setInput(e.target.value)
+            }}
           ></input>
           <select className='w-1/12 ml-2'>
             <option value='price'>Price</option>
