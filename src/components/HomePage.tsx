@@ -9,19 +9,20 @@ import { useEffect, useState, useRef } from 'react'
 
 const HomePage = ({ products }) => {
   const [input, setInput] = useState('')
-  const { data, isFetching, error, refetch } = useSearchProductsQuery()
+  const { data, isFetching, error, refetch } = useSearchProductsQuery(input)
   const inputRef = useRef('')
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (inputRef.current !== input) {
       refetch({ input })
       inputRef.current = input
     }
-  }, [input, refetch])*/
+  }, [input, refetch])
   console.log(data)
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setInput(e.target.value)
   }
 
   if (isFetching) return <div>Loading...</div>
@@ -54,10 +55,7 @@ const HomePage = ({ products }) => {
           <input
             className='w-2/3 p-3 focus-within: text-left'
             type='text'
-            ref={inputRef}
-            onChange={(e) => {
-              setInput(e.target.value)
-            }}
+            placeholder='Search for products'
           ></input>
           <select className='w-1/12 ml-2'>
             <option value='price'>Price</option>
