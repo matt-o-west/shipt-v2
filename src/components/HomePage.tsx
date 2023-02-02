@@ -25,7 +25,6 @@ const HomePage = ({ products }) => {
     setInput(e.target.value)
   }
 
-  if (isFetching) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
 
   return (
@@ -56,7 +55,7 @@ const HomePage = ({ products }) => {
             className='w-2/3 p-3 focus-within: text-left'
             type='text'
             placeholder='Search for products'
-          ></input>
+          />
           <select className='w-1/12 ml-2'>
             <option value='price'>Price</option>
             <option value='rating'>Rating</option>
@@ -67,7 +66,8 @@ const HomePage = ({ products }) => {
       </div>
 
       <div className='grid grid-cols-1 lg:max-w-6xl lg:ml-44 sm:grid-cols-3 lg:grid-cols-5 gap-6 gap-x-0'>
-        {(products.length > 0 &&
+        {(!isFetching &&
+          products.length > 0 &&
           products.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))) || <p>Loading...</p>}
